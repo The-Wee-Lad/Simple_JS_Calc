@@ -35,6 +35,7 @@
 .src{
     width: 100%;
     height: 20%;
+    font-size: 4rem;
 }
 .screen
 {
@@ -160,4 +161,15 @@ a:hover
 .sym:hover{
     background-color: aquamarine;
 } */
+
+
+ .number:active
+{
+    background-color: rgb(255, 253, 132);
+    transition-delay: 50ms;
+}
+.sym:active{
+    background-color: aquamarine;
+    transition-delay: 50ms;
+}
  
