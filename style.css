@@ -60,14 +60,13 @@
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  align-content: center;
   justify-content: center;
 }
 .number {
   border: 1px solid grey;
   height: 20%;
   flex-basis: 30%;
-  padding-top: 2rem;
+  padding-top: 12%;
   background-color: rgba(237, 225, 210, 0.7);
   border-radius: 5px;
   font-size: 1.5rem;
@@ -76,14 +75,12 @@
 .operators {
   width: auto;
   flex-grow: 1;
-  gap: 8.7px;
   background-color: rgba(255, 235, 205, 0.493);
 }
 
 .sym {
   flex-basis: 92%;
   height: 12.5%;
-  width: 30%;
   text-align: center;
   padding-top: 1rem;
   border: 1px solid grey;
