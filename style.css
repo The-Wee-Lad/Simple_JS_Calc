@@ -53,7 +53,7 @@
     text-shadow: 1px -1px 1px white;
     padding-right:10px ;
     font-family:sans-serif;
-    
+    cursor: no-drop;
 }
 .buttons
 {
@@ -87,7 +87,7 @@
     flex-grow: 1;
     gap: 8.7px;
     background-color: rgba(255, 235, 205, 0.493);
-    /* cursor: pointer; */
+    
 }
 
 .sym
@@ -102,6 +102,7 @@
     border-radius: 5px;
     font-size: 1.5rem;
     font-weight: 600;
+    cursor: pointer;
 }
 #point
 {
