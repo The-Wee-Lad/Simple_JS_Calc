@@ -1,6 +1,6 @@
 let screen =  document.querySelector(".screen");
 let author = document.querySelector("#author");
-screen.addEventListener("keydown",logKey);
+addEventListener("keydown",logKey);
 addEventListener("click",logPress)
 
 
@@ -28,7 +28,8 @@ function calculate()
         }
         screen.value=result;    
     } catch (err) {
-        screen.value = "ERROR : invalid expression";        
+        screen.value = "ERROR";
+        screen.style.backgroundColor = "#FF0000";        
         console.log("FUCK YOU");
     }
     
@@ -75,12 +76,17 @@ function check(key)
     {
         r = false;
         if(screen.value[screen.value.length-1]!='.')
-            {open_bracket++; r =true;}
+        {
+            if(!isNaN(screen.value[screen.value.length-1]))
+                screen.value+='*';
+            open_bracket++; r =true;
+        }
     }
     if(key==')')
     {   
         r = false;
-        if(open_bracket>0)
+        lastValue = screen.value[screen.value.length-1];
+        if(open_bracket>0 && !signs.includes(lastValue) && lastValue!='(')
         {
             open_bracket--;
             r = true;
@@ -127,7 +133,10 @@ function update(event) {
             if(t == "Backspace")
                 screen.value=screen.value.slice(0,-1);
             else if(t == "Clear")
+            {
                 screen.value="";
+                screen.style.backgroundColor="black";
+            }
             else if(t == '=' || t == 'Enter')
             {
                 calculate();
@@ -137,17 +146,22 @@ function update(event) {
                 screen.value+=t;
             }
         }
-    }  
+    } 
+    else if(className == "screen")
+    {
+        console.log("Click --> Screen")
+        screen.blur();
+    }
 }
 
 function logKey(event)
 {
+    screen.focus();
     action(event);
 }
 
 function logPress(event)
 {
-    console.log("hey");
     update(event);
 }
 

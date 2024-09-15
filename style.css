@@ -79,6 +79,7 @@
     background-color: rgba(237, 225, 210, 0.7);
     border-radius: 5px;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 .operators
 {  
@@ -86,6 +87,7 @@
     flex-grow: 1;
     gap: 8.7px;
     background-color: rgba(255, 235, 205, 0.493);
+    cursor: pointer;
 }
 
 .sym
@@ -145,10 +147,8 @@ a:hover
  .number:active
 {
     background-color: rgb(255, 253, 132);
-    transition-delay: 0ms;
 }
 .sym:active{
     background-color: aquamarine;
-    transition-delay: 0ms;
 }
  
