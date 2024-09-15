@@ -1,6 +1,10 @@
 let screen =  document.querySelector(".screen");
+let author = document.querySelector("#author");
 screen.addEventListener("keydown",logKey);
-wrapper.addEventListener("click",logPress)
+addEventListener("click",logPress)
+
+
+
 let expression = screen.value;
 let open_bracket = 0;
 
@@ -45,6 +49,15 @@ function check(key)
         ||key=='Enter'
     )
         r = true;
+    if(key=='/' || key=='*')
+    {
+        r = false;
+        let sign = "+-/*x=.("
+        if((sign.includes(key) && !(sign.includes(expression[expression.length-1]))))
+        {
+            r = true;
+        }
+    }
     if(key=='.')
     {
         let string = "("+screen.value+")";
@@ -60,7 +73,9 @@ function check(key)
     }
     if(key=='(')
     {
-        open_bracket++;
+        r = false;
+        if(screen.value[screen.value.length-1]!='.')
+            {open_bracket++; r =true;}
     }
     if(key==')')
     {   
