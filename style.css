@@ -1,8 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    
+    box-sizing: border-box;    
 }
 
 #wrapper
@@ -35,7 +34,6 @@
 }
 .screen
 {
-    border: 1px black solid;
     background-color: rgb(1, 1, 1);
     color: white;
     height: 20%;
@@ -44,9 +42,10 @@
     font-family: Digital Italics;
     border-radius: 10px;
     text-align: right;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     text-shadow: 1px -1px 1px white;
+    
     
 }
 .buttons
@@ -115,7 +114,6 @@
     height: 2rem;
     width:6rem;
     background-color: rgb(221, 147, 147);
-    display: inline;
     font-family: Digital;
     font-weight: 800;
     left: 75%;
