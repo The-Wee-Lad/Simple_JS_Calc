@@ -110,10 +110,10 @@ function action(event)
         event.preventDefault();
         screen.value+='*'
     }
-    if(key=="Backspace"
-        ||key=="ArrowLeft"
-        ||key=="ArrowRight")
+    if(key=="Backspace")
         return;
+    if(!isNaN(key) && expression[expression.length-1]==')')
+        screen.value+='*';
     if(key == '=' || key=='Enter')
     {
         event.preventDefault();
