@@ -6,7 +6,14 @@ addEventListener("click", logPress);
 let expression = screen.value;
 let open_bracket = 0;
 
-
+function red()
+{
+  screen.style.color="#cc3300";
+}
+function white()
+{
+  screen.style.color="white";
+}
 function format(string) {
   while(open_bracket>0)
   {
@@ -26,7 +33,6 @@ function calculate() {
       result;
     console.log("string : " + string);
     if (string == "") result = "";
-    else if(string[string.length-1] == "(") return;
     else {
       string = format(string);
       string="return "+string;
@@ -133,6 +139,8 @@ function action(event) {
     event.preventDefault();
     return;
   }
+  else
+    red();
   if (key == "x") {
     event.preventDefault();
     screen.value += "*";
@@ -169,6 +177,8 @@ function update(event) {
       }
       screen.value += t;
     }
+    else
+      red();
   } else if (className == "screen") {
     console.log("Click --> Screen");
     screen.blur();
@@ -177,10 +187,12 @@ function update(event) {
 
 function logKey(event) {
   screen.focus();
+  white();
   action(event);
   console.log("Debug : " + screen.value);
 }
 
 function logPress(event) {
+  white();
   update(event);
 }
