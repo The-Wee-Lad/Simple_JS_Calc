@@ -7,6 +7,11 @@ let expression = screen.value;
 let open_bracket = 0;
 
 function format(string) {
+  while(open_bracket>0)
+  {
+    string+=')';
+    open_bracket--;
+  }
   return string;
 }
 function reset() {
@@ -19,9 +24,12 @@ function calculate() {
     let string = screen.value,
       result;
     console.log("string : " + string);
-    if (screen.value == "") result = "";
+    if (string == "") result = "";
+    else if(string[string.length-1] == "(") return;
     else {
       string = format(string);
+      console.log("string : "+string);
+      
       result = Function("return " + string)();
     }
     screen.value = result;
@@ -70,6 +78,7 @@ function check(key) {
       if (string[i] == "." && r == false) return false;
     }
   }
+
   if (key == "(") {
     r = false;
     let lastValue = screen.value[screen.value.length - 1];
@@ -79,6 +88,7 @@ function check(key) {
       r = true;
     }
   }
+
   if (key == ")") {
     r = false;
     lastValue = screen.value[screen.value.length - 1];
@@ -87,6 +97,7 @@ function check(key) {
       r = true;
     }
   }
+
   if (!isNaN(key) && screen.value[screen.value.length - 1] == ")") {
     console.log("The cunt doesn't work");
     screen.value += "*";
@@ -146,7 +157,7 @@ function update(event) {
 function logKey(event) {
   screen.focus();
   action(event);
-  console.log("oooo : " + screen.value);
+  console.log("Debug : " + screen.value);
 }
 
 function logPress(event) {
