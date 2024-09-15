@@ -6,6 +6,7 @@ addEventListener("click", logPress);
 let expression = screen.value;
 let open_bracket = 0;
 
+
 function format(string) {
   while(open_bracket>0)
   {
@@ -28,17 +29,22 @@ function calculate() {
     else if(string[string.length-1] == "(") return;
     else {
       string = format(string);
-      console.log("string : "+string);
-      
-      result = Function("return " + string)();
+      string="return "+string;
+      console.log("Pass string : "+string);
+      result = Function(string)();
+      console.log("Result string : "+result);
+      if(isNaN(result)) result = "Undef";
     }
     screen.value = result;
   } catch (err) {
     screen.value = "ERROR";
     screen.style.backgroundColor = "#FF0000";
-    console.log("FUCK YOU");
+    console.log(err);
   }
 }
+
+
+
 function check(key) {
   let signs = "+-/*x=.";
   console.log("check key : " + key);
@@ -56,8 +62,8 @@ function check(key) {
     key == "Control" ||
     key == "Shift" ||
     key == "I"
-  )
-    r = true;
+  ) r = true;
+
   if (key == "/" || key == "*") {
     r = false;
     let sign = "+-/*x=.(";
@@ -102,11 +108,26 @@ function check(key) {
     console.log("The cunt doesn't work");
     screen.value += "*";
   }
+
+  if(key=="=" || key=='Enter')
+  {
+
+    r = false;
+    signs+='(';
+    if(!signs.includes(screen.value[screen.value.length - 1]))
+      r = true;
+  }
   return r;
 }
+
+
+
+
+
+
 function action(event) {
   let key = event.key;
-  console.log(key);
+  console.log("KeyPress : "+key);
   let bool = check(key);
   if (!bool) {
     event.preventDefault();
@@ -117,11 +138,11 @@ function action(event) {
     screen.value += "*";
   }
   if (key == "Backspace") {
-    if (screen.value == "ERROR") reset();
+    if (screen.value == "ERROR" || screen.value == "Infinity" || screen.value =="Undef") reset();
     return;
   }
   if (key == "=" || key == "Enter") {
-    event.preventDefault();
+    event.preventDefault();  
     calculate();
   }
 }
@@ -134,7 +155,7 @@ function update(event) {
     let t = tar.textContent;
     if (check(t)) {
       if (t == "Backspace") {
-        if (screen.value == "ERROR") reset();
+        if (screen.value == "ERROR" || screen.value == "Infinity" || screen.value =="Undef") reset();
         screen.value = screen.value.slice(0, -1);
         return;
       }
@@ -142,7 +163,7 @@ function update(event) {
         reset();
         return;
       }
-      if (t == "=" || t == "Enter") {
+      if (t == "=") {
         calculate();
         return;
       }
