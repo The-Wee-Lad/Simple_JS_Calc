@@ -54,7 +54,7 @@ function check(key)
     {
         r = false;
         let sign = "+-/*x=.("
-        if((sign.includes(key) && !(sign.includes(expression[expression.length-1]))))
+        if((sign.includes(key) && !(sign.includes(expression[expression.length-1]))) && expression.length!=0)
         {
             r = true;
         }

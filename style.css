@@ -87,7 +87,7 @@
     flex-grow: 1;
     gap: 8.7px;
     background-color: rgba(255, 235, 205, 0.493);
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .sym
