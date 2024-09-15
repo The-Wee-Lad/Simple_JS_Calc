@@ -12,7 +12,12 @@ function format(string)
 {
     return string;
 }
-
+function reset()
+{
+    screen.value="";
+    screen.style.backgroundColor="black";
+    return;
+}
 function calculate()
 {
     try 
@@ -48,6 +53,7 @@ function check(key)
         ||key=='('
         ||key==')'
         ||key=='Enter'
+        ||key =='Control'||key=='Shift'||key=='I'
     )
         r = true;
     if(key=='/' || key=='*')
@@ -92,11 +98,15 @@ function check(key)
             r = true;
         }
     }
+    if(!isNaN(key) && screen.value[screen.value.length-1] == ')')
+    {
+        console.log("The cunt doesn't work");
+        screen.value+='*'
+    }
     return r;
 }
 function action(event)
 {
-    expression = screen.value;
     let key = event.key;
     console.log(key);
     let bool = check(key);
@@ -111,9 +121,11 @@ function action(event)
         screen.value+='*'
     }
     if(key=="Backspace")
+    {
+        if(screen.value == 'ERROR')
+            reset();
         return;
-    if(!isNaN(key) && expression[expression.length-1]==')')
-        screen.value+='*';
+    }
     if(key == '=' || key=='Enter')
     {
         event.preventDefault();
@@ -131,20 +143,23 @@ function update(event) {
         if(check(t))
         {
             if(t == "Backspace")
-                screen.value=screen.value.slice(0,-1);
-            else if(t == "Clear")
             {
-                screen.value="";
-                screen.style.backgroundColor="black";
+                if(screen.value=='ERROR')
+                    reset();
+                screen.value=screen.value.slice(0,-1);
+                return;
             }
-            else if(t == '=' || t == 'Enter')
+            if(t == "Clear")
+            {
+                reset();
+                return;
+            }
+            if(t == '=' || t == 'Enter')
             {
                 calculate();
+                return;
             }     
-            else
-            {
-                screen.value+=t;
-            }
+            screen.value+=t;
         }
     } 
     else if(className == "screen")
@@ -158,6 +173,8 @@ function logKey(event)
 {
     screen.focus();
     action(event);
+    console.log("oooo : "+screen.value);
+
 }
 
 function logPress(event)
