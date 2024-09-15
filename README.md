@@ -1,2 +1,4 @@
 # Simple_JS_Calc
-Simple Calc
+A Simple Calculator 
+
+Layout: flex
