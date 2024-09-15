@@ -72,8 +72,9 @@ function check(key) {
   }
   if (key == "(") {
     r = false;
-    if (screen.value[screen.value.length - 1] != ".") {
-      if (!isNaN(screen.value[screen.value.length - 1])) screen.value += "*";
+    let lastValue = screen.value[screen.value.length - 1];
+    if (lastValue != ".") {
+      if (!isNaN(lastValue) ||lastValue == ')') screen.value += "*";
       open_bracket++;
       r = true;
     }
