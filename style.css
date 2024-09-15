@@ -45,15 +45,14 @@
     color: white;
     height: 100%;
     width: 100%;
-    font-size: 4rem;
-    font-family: ;
+    font-size: 3.5rem;
     border-radius: 10px;
     text-align: right;
     overflow-x: auto;
     overflow-y: hidden;
     text-shadow: 1px -1px 1px white;
     padding-right:10px ;
-    font-family: TDigital;
+    font-family:sans-serif;
     
 }
 .buttons
