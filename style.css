@@ -2,10 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    text-align: center;
-    /* background-color: rgb(255, 252, 252); */
+    
 }
 
+#wrapper
+{
+   
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    border: 4px solid black;
+    position: relative;
+    background-color:azure;
+    
+}
 
 .container
 {   
@@ -13,13 +23,12 @@
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
-    height: 100vh;
-    width:50vw;
-
+    height: 600px;
+    width:  400px;
     position:fixed;
     inset: 0px;
     margin: auto;
-
+    
 }
 .screen
 {
@@ -28,10 +37,13 @@
     color: white;
     height: 20%;
     width: 100%;
-    font-size: 30px;
+    font-size: 4.5rem;
+    font-family: Digital Italics Mono;
     border-radius: 10px;
     text-align: right;
     overflow:auto;
+    text-shadow: 1px -1px 1px white;
+    
 }
 .buttons
 {
@@ -91,4 +103,35 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 1rem;
     font-weight: 600;
+}
+
+#author
+{
+    text-align: center;
+    height: 2rem;
+    width:6rem;
+    background-color: rgb(221, 147, 147);
+    display: inline;
+    font-family: Digital;
+    font-weight: 800;
+    position: fixed;
+    left: 75%;
+    top: 83%;
+    border-radius: 3px;
+}
+@font-face {
+    font-family: Digital;
+    src: url(./digital-7.ttf);
+}
+@font-face {
+    font-family: Digital Italics;
+    src: url(./digital-7\ \(italic\).ttf);
+}
+@font-face {
+    font-family: Digital Italics Mono;
+    src: url(./digital-7\ \(mono\ italic\).ttf);
+}
+@font-face {
+    font-family: Digital Mono;
+    src: url(./digital-7\ \(mono\).ttf);
 }
