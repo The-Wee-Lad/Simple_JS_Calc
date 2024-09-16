@@ -5,24 +5,21 @@ addEventListener("click", logPress);
 
 let expression = screen.value;
 let open_bracket = 0;
-function red()
-{
-  screen.style.color="#cc3300";
-  (function now(){
+function red() {
+  screen.style.color = "#cc3300";
+  (function now() {
     screen.classList.add("shake");
-    setTimeout(function(){
+    setTimeout(function () {
       screen.classList.remove("shake");
     }, 30);
   })();
 }
-function white()
-{
-  screen.style.color="white";
+function white() {
+  screen.style.color = "white";
 }
 function format(string) {
-  while(open_bracket>0)
-  {
-    string+=')';
+  while (open_bracket > 0) {
+    string += ")";
     open_bracket--;
   }
   return string;
@@ -40,19 +37,19 @@ function calculate() {
     if (string == "") result = "";
     else {
       string = format(string);
-      string="return "+string;
+      string = "return " + string;
       result = Function(string)();
-      console.log("Before : "+ result);
-      let arr = (""+result).split('.');
-      
+      console.log("Before : " + result);
+      let arr = ("" + result).split(".");
+
       let mantissa = arr[0].length;
-      let exponent = (arr[1]?.length) === undefined ? 0:arr[1].length;
-      console.log(mantissa+" "+exponent);
-      result = result.toPrecision(mantissa + (exponent>5?5:exponent));
-      result = result*1;
-      if(isNaN(result)) result = "Undefined";
+      let exponent = arr[1]?.length === undefined ? 0 : arr[1].length;
+      console.log(mantissa + " " + exponent);
+      result = result.toPrecision(mantissa + (exponent > 5 ? 5 : exponent));
+      result = result * 1;
+      if (isNaN(result)) result = "Undefined";
     }
-    console.log("After : "+result);
+    console.log("After : " + result);
     screen.value = result;
   } catch (err) {
     screen.value = "ERROR";
@@ -60,8 +57,6 @@ function calculate() {
     console.log(err);
   }
 }
-
-
 
 function check(key) {
   let signs = "+-/*x=.";
@@ -80,7 +75,8 @@ function check(key) {
     key == "Control" ||
     key == "Shift" ||
     key == "I"
-  ) r = true;
+  )
+    r = true;
 
   if (key == "/" || key == "*") {
     r = false;
@@ -107,7 +103,7 @@ function check(key) {
     r = false;
     let lastValue = screen.value[screen.value.length - 1];
     if (lastValue != ".") {
-      if (!isNaN(lastValue) ||lastValue == ')') screen.value += "*";
+      if (!isNaN(lastValue) || lastValue == ")") screen.value += "*";
       open_bracket++;
       r = true;
     }
@@ -124,24 +120,16 @@ function check(key) {
 
   if (!isNaN(key) && screen.value[screen.value.length - 1] == ")")
     screen.value += "*";
-  
-  if(key=="=" || key=='Enter')
-  {
+
+  if (key == "=" || key == "Enter") {
     r = false;
-    signs+='(';
-    if(!signs.includes(screen.value[screen.value.length - 1]))
-      r = true;
+    signs += "(";
+    if (!signs.includes(screen.value[screen.value.length - 1])) r = true;
   }
 
-  if(key == ' ')
-      r = false;
+  if (key == " ") r = false;
   return r;
 }
-
-
-
-
-
 
 function action(event) {
   let key = event.key;
@@ -156,11 +144,16 @@ function action(event) {
     screen.value += "*";
   }
   if (key == "Backspace") {
-    if (screen.value == "ERROR" || screen.value == "Infinity" || screen.value =="Undef") reset();
+    if (
+      screen.value == "ERROR" ||
+      screen.value == "Infinity" ||
+      screen.value == "Undef"
+    )
+      reset();
     return;
   }
   if (key == "=" || key == "Enter") {
-    event.preventDefault();  
+    event.preventDefault();
     calculate();
   }
 }
@@ -168,12 +161,17 @@ function action(event) {
 function update(event) {
   let tar = event.target;
   let className = tar.className;
-  console.log("Click --> "+className);
+  console.log("Click --> " + className);
   if (className == "number" || className == "sym") {
     let t = tar.textContent;
     if (check(t)) {
       if (t == "Backspace") {
-        if (screen.value == "ERROR" || screen.value == "Infinity" || screen.value =="Undef") reset();
+        if (
+          screen.value == "ERROR" ||
+          screen.value == "Infinity" ||
+          screen.value == "Undef"
+        )
+          reset();
         screen.value = screen.value.slice(0, -1);
         return;
       }
@@ -186,25 +184,29 @@ function update(event) {
         return;
       }
       screen.value += t;
-    }
-    else
-      red();
-  } else (className == "screen")
-      screen.blur();
+    } else red();
+  } else className == "screen";
+  screen.blur();
 }
 
 function logKey(event) {
   screen.focus();
-  if(screen.value == "Undefined")
-      reset();
+  if (screen.value == "Undefined") reset();
   white();
   action(event);
   console.log("Debug : " + screen.value);
 }
 
 function logPress(event) {
-  if(screen.value == "Undefined")
-    reset();
+  
+  if (screen.value == "Undefined") reset();
   white();
   update(event);
 }
+
+
+addEventListener("touchstart",(event)=>{
+    console.log(event);
+    
+});
+
