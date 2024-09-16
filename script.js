@@ -44,8 +44,12 @@ function calculate() {
       result = Function(string)();
       console.log("Before : "+ result);
       let arr = (""+result).split('.');
-      console.log(arr[0]?.length);
-      result = result.toPrecision(arr[0].length + (((arr[1]?.length)>5)?5:(arr[1]?.length)));
+      
+      let mantissa = arr[0].length;
+      let exponent = (arr[1]?.length) === undefined ? 0:arr[1].length;
+      console.log(mantissa+" "+exponent);
+      result = result.toPrecision(mantissa + (exponent>5?5:exponent));
+      result = result*1;
       if(isNaN(result)) result = "Undefined";
     }
     console.log("After : "+result);
