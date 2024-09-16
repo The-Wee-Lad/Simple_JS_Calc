@@ -43,10 +43,12 @@ function calculate() {
       string="return "+string;
       result = Function(string)();
       console.log("Before : "+ result);
-      result = result.toPrecision(5);
+      let arr = (""+result).split('.');
+      console.log(arr[0]?.length);
+      result = result.toPrecision(arr[0].length + (((arr[1]?.length)>5)?5:(arr[1]?.length)));
       if(isNaN(result)) result = "Undefined";
     }
-    console.log("Put On : "+result);
+    console.log("After : "+result);
     screen.value = result;
   } catch (err) {
     screen.value = "ERROR";
@@ -59,7 +61,7 @@ function calculate() {
 
 function check(key) {
   let signs = "+-/*x=.";
-  console.log("check key : " + key);
+  console.log("Key : " + key);
   expression = screen.value;
   let r = false;
   if (
@@ -116,11 +118,9 @@ function check(key) {
     }
   }
 
-  if (!isNaN(key) && screen.value[screen.value.length - 1] == ")") {
-    console.log("The cunt doesn't work");
+  if (!isNaN(key) && screen.value[screen.value.length - 1] == ")")
     screen.value += "*";
-  }
-
+  
   if(key=="=" || key=='Enter')
   {
     r = false;
@@ -141,7 +141,6 @@ function check(key) {
 
 function action(event) {
   let key = event.key;
-  console.log("KeyPress : "+key);
   let bool = check(key);
   if (!bool) {
     red();
@@ -165,7 +164,7 @@ function action(event) {
 function update(event) {
   let tar = event.target;
   let className = tar.className;
-  console.log(className);
+  console.log("Click --> "+className);
   if (className == "number" || className == "sym") {
     let t = tar.textContent;
     if (check(t)) {
@@ -186,10 +185,8 @@ function update(event) {
     }
     else
       red();
-  } else if (className == "screen") {
-    console.log("Click --> Screen");
-    screen.blur();
-  }
+  } else (className == "screen")
+      screen.blur();
 }
 
 function logKey(event) {
