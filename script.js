@@ -41,11 +41,12 @@ function calculate() {
     else {
       string = format(string);
       string="return "+string;
-      console.log("Pass string : "+string);
       result = Function(string)();
-      console.log("Result string : "+result);
-      if(isNaN(result)) result = "Undef";
+      console.log("Before : "+ result);
+      result = result.toPrecision(5);
+      if(isNaN(result)) result = "Undefined";
     }
+    console.log("Put On : "+result);
     screen.value = result;
   } catch (err) {
     screen.value = "ERROR";
@@ -122,12 +123,14 @@ function check(key) {
 
   if(key=="=" || key=='Enter')
   {
-
     r = false;
     signs+='(';
     if(!signs.includes(screen.value[screen.value.length - 1]))
       r = true;
   }
+
+  if(key == ' ')
+      r = false;
   return r;
 }
 
@@ -141,11 +144,10 @@ function action(event) {
   console.log("KeyPress : "+key);
   let bool = check(key);
   if (!bool) {
+    red();
     event.preventDefault();
     return;
   }
-  else
-    red();
   if (key == "x") {
     event.preventDefault();
     screen.value += "*";
@@ -192,12 +194,16 @@ function update(event) {
 
 function logKey(event) {
   screen.focus();
+  if(screen.value == "Undefined")
+      reset();
   white();
   action(event);
   console.log("Debug : " + screen.value);
 }
 
 function logPress(event) {
+  if(screen.value == "Undefined")
+    reset();
   white();
   update(event);
 }
