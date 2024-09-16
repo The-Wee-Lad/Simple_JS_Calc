@@ -33,7 +33,7 @@ function calculate() {
   try {
     let string = screen.value,
       result;
-    console.log("string : " + string);
+    console.log("Calc string : " + string);
     if (string == "") result = "";
     else {
       string = format(string);
@@ -144,11 +144,9 @@ function action(event) {
     screen.value += "*";
   }
   if (key == "Backspace") {
-    if (
-      screen.value == "ERROR" ||
-      screen.value == "Infinity" ||
-      screen.value == "Undef"
-    )
+    if(screen.value[screen.value.length-1] == '(')
+      open_bracket--;
+    if (isFinite(screen.value))
       reset();
     return;
   }
@@ -166,12 +164,10 @@ function update(event) {
     let t = tar.textContent;
     if (check(t)) {
       if (t == "Backspace") {
-        if (
-          screen.value == "ERROR" ||
-          screen.value == "Infinity" ||
-          screen.value == "Undef"
-        )
+        if (isFinite(screen.value))
           reset();
+        if(screen.value[screen.value.length-1] == '(')
+          open_bracket--;
         screen.value = screen.value.slice(0, -1);
         return;
       }
