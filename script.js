@@ -3,6 +3,8 @@ let author = document.querySelector("#author");
 addEventListener("keydown", logKey);
 addEventListener("click", logPress);
 
+
+let AnsState = 0;
 let expression = screen.value;
 let open_bracket = 0;
 function red() {
@@ -30,6 +32,7 @@ function reset() {
   return;
 }
 function calculate() {
+  AnsState = 1;
   try {
     let string = screen.value,
       result;
@@ -189,12 +192,21 @@ function logKey(event) {
   screen.focus();
   if (screen.value == "Undefined") reset();
   white();
+  if(AnsState == 1 && (!isNaN(event.key)||event.key=='.'))
+  {
+    reset();
+    AnsState = 0;
+  }
   action(event);
   console.log("Debug : " + screen.value);
 }
 
 function logPress(event) {
-  
+  if(AnsState == 1 && (!isNaN(event.target.textContent)||event.target.textContent=='.'))
+  {
+    reset();
+    AnsState = 0;
+  }
   if (screen.value == "Undefined") reset();
   white();
   update(event);
