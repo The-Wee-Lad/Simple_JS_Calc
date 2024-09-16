@@ -5,10 +5,15 @@ addEventListener("click", logPress);
 
 let expression = screen.value;
 let open_bracket = 0;
-
 function red()
 {
   screen.style.color="#cc3300";
+  (function now(){
+    screen.classList.add("shake");
+    setTimeout(function(){
+      screen.classList.remove("shake");
+    }, 30);
+  })();
 }
 function white()
 {

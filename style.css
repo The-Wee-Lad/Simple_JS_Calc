@@ -1,5 +1,20 @@
 @import url("./fonts.css");
 
+@keyframes shaker {
+	0% { transform: skewX(-10deg); }
+ 5% { transform: skewX(10deg); }
+ 10% { transform: skewX(-10deg); }
+ 15% { transform: skewX(10deg); }
+ 20% { transform: skewX(0deg); }
+ 100% { transform: skewX(0deg); }
+}
+.shake {
+	animation-name: shaker;
+	animation-duration: 0.1s;
+	transform-origin:50% 50%;
+	animation-timing-function: linear;
+}
+
 * {
   margin: 0;
   padding: 0;
