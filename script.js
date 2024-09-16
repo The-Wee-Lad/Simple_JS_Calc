@@ -205,8 +205,3 @@ function logPress(event) {
 }
 
 
-addEventListener("touchstart",(event)=>{
-    console.log(event);
-    
-});
-
